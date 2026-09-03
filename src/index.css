@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/*
+  This @theme block is how Tailwind v4 lets us define our own design
+  tokens. Once defined here, they become real Tailwind classes:
+  e.g. --color-accent below means we can write className="bg-accent"
+  anywhere in the project, and it will always be the same amber color.
+  This is the single source of truth for BuildIt's visual identity.
+*/
+@theme {
+  /* Color palette */
+  --color-ink: #0a0a0b;          /* page background */
+  --color-surface: #141416;      /* card / panel background */
+  --color-surface-2: #1c1c1f;    /* hover state for panels */
+  --color-border: #2a2a2e;       /* default hairline border */
+  --color-border-strong: #38383d;/* emphasized border, e.g. hover */
+  --color-text: #ededef;         /* primary text (off-white, not pure white) */
+  --color-text-muted: #8b8b93;   /* secondary / supporting text */
+  --color-accent: #d98e4a;       /* the one signal color, used sparingly */
+  --color-accent-strong: #e8a25c;/* accent hover state */
+  --color-accent-ink: #14100a;   /* dark text used on top of the accent color */
+
+  /* Typography: each font has one job, not decoration */
+  --font-display: "Space Grotesk", sans-serif; /* headings only */
+  --font-sans: "Inter", sans-serif;            /* body text */
+  --font-mono: "JetBrains Mono", monospace;    /* real data only: dates, numbers, tags */
+
+  /* Radius: interactive elements are slightly rounder than structural ones */
+  --radius-control: 6px; /* buttons, inputs */
+  --radius-panel: 2px;   /* cards, containers - sharp, schematic feel */
+}
+
+/* Smooth-scrolls the page when a nav link like href="#tracks" is clicked,
+   instead of jumping instantly. The prefers-reduced-motion block further
+   down turns this off for people who've asked their OS to reduce motion. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base styles applied site-wide */
+body {
+  background-color: var(--color-ink);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+/* Visible focus ring for keyboard navigation - important for accessibility.
+   Without this, people tabbing through the site with a keyboard can't see
+   which element is currently focused. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Respect people who've asked their OS to reduce motion (accessibility
+   setting). This overrides any animation/transition we add elsewhere. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
