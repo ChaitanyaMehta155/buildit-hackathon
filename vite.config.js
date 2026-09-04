@@ -6,6 +6,22 @@ import { defineConfig, loadEnv } from 'vite'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
+  console.log(
+    '[Vercel Env Check - process.env]',
+    'URL:', Boolean(process.env.VITE_SUPABASE_URL),
+    'URL length:', process.env.VITE_SUPABASE_URL?.length ?? 0,
+    'KEY:', Boolean(process.env.VITE_SUPABASE_ANON_KEY),
+    'KEY length:', process.env.VITE_SUPABASE_ANON_KEY?.length ?? 0
+  )
+
+  console.log(
+    '[Vercel Env Check - loadEnv]',
+    'URL:', Boolean(env.VITE_SUPABASE_URL),
+    'URL length:', env.VITE_SUPABASE_URL?.length ?? 0,
+    'KEY:', Boolean(env.VITE_SUPABASE_ANON_KEY),
+    'KEY length:', env.VITE_SUPABASE_ANON_KEY?.length ?? 0
+  )
+
   return {
     plugins: [react(), tailwindcss()],
     define: {
