@@ -68,6 +68,24 @@ export function AuthProvider({ children }) {
     return await supabase.auth.signOut()
   }
 
+  const resetPasswordForEmail = async (email) => {
+    if (!isSupabaseConfigured || !supabase) {
+      return { error: { message: 'Supabase is not configured yet.' } }
+    }
+    return await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    })
+  }
+
+  const updatePassword = async (newPassword) => {
+    if (!isSupabaseConfigured || !supabase) {
+      return { error: { message: 'Supabase is not configured yet.' } }
+    }
+    return await supabase.auth.updateUser({
+      password: newPassword,
+    })
+  }
+
   const value = useMemo(
     () => ({
       session,
@@ -76,6 +94,8 @@ export function AuthProvider({ children }) {
       signUp,
       signIn,
       signOut,
+      resetPasswordForEmail,
+      updatePassword,
       isConfigured: isSupabaseConfigured,
     }),
     [session, user, loading]

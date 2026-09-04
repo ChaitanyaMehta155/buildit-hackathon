@@ -8,6 +8,7 @@ import Prizes from './pages/Prizes'
 import Register from './pages/Register'
 import Rules from './pages/Rules'
 import Dashboard from './pages/Dashboard'
+import ResetPassword from './pages/ResetPassword'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="rules" element={<Rules />} />
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="reset-password" element={<ResetPassword />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
